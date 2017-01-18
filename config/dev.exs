@@ -36,8 +36,8 @@ config :phoenix, :stacktrace_depth, 20
 # Configure your database
 config :nemestats, Nemestats.Repo,
   adapter: Ecto.Adapters.Postgres,
-  username: "postgres",
-  password: "postgres",
+  username: System.get_env("PG_USER"),
+  password: System.get_env("PG_PASSWORD"),
   database: "nemestats_dev",
   hostname: "localhost",
   pool_size: 10
