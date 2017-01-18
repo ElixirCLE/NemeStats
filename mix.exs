@@ -4,7 +4,7 @@ defmodule Nemestats.Mixfile do
   def project do
     [app: :nemestats,
      version: "0.0.1",
-     elixir: "~> 1.2",
+     elixir: "~> 1.4",
      elixirc_paths: elixirc_paths(Mix.env),
      compilers: [:phoenix, :gettext] ++ Mix.compilers,
      build_embedded: Mix.env == :prod,
@@ -19,7 +19,7 @@ defmodule Nemestats.Mixfile do
   def application do
     [mod: {Nemestats, []},
      applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext,
-                    :phoenix_ecto, :postgrex]]
+                    :phoenix_ecto, :postgrex, :ueberauth, :ueberauth_google]]
   end
 
   # Specifies which paths to compile per environment.
@@ -37,7 +37,11 @@ defmodule Nemestats.Mixfile do
      {:phoenix_html, "~> 2.6"},
      {:phoenix_live_reload, "~> 1.0", only: :dev},
      {:gettext, "~> 0.11"},
-     {:cowboy, "~> 1.0"}]
+     {:cowboy, "~> 1.0"},
+     {:phoenix_slime, "~> 0.6.0"},
+     {:ueberauth, "~> 0.2"},
+     {:ueberauth_google, "~> 0.2"},
+     {:guardian, "~>0.14.0"}]
   end
 
   # Aliases are shortcuts or tasks specific to the current project.
