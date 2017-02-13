@@ -17,10 +17,30 @@ config :nemestats, Nemestats.Endpoint,
   pubsub: [name: Nemestats.PubSub,
            adapter: Phoenix.PubSub.PG2]
 
+config :phoenix, :template_engines,
+  slim: PhoenixSlime.Engine,
+  slime: PhoenixSlime.Engine
+
+config :ueberauth, Ueberauth,
+  providers: [
+    google: { Ueberauth.Strategy.Google, [] }
+  ]
+
+config :ueberauth, Ueberauth.Strategy.Google.OAuth,
+  client_id: System.get_env("GOOGLE_CLIENT_ID"),
+  client_secret: System.get_env("GOOGLE_CLIENT_SECRET")
+
 # Configures Elixir's Logger
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:request_id]
+
+#TODO replace the secret key below - it was yanked from the above endpoint!
+config :guardian, Guardian,
+  issuer: "Nemestats",
+  ttl: { 30, :days },
+  secret_key: "U1T/brFnIk7MW5y25pbnzLOXI1LXTQANO0qv8fur+VuMWkYovEiFairmXKCz2Pbs",
+  serializer: Nemestats.GuardianSerializer
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
